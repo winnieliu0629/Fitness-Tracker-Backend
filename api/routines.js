@@ -12,9 +12,13 @@ const {
 
 
 // GET /api/routines
-router.get('/', async (req, res) => {
-    const allRoutines = await getAllRoutines();
-    res.send(allRoutines);
+router.get('/', async (req, res, next) => {
+    try {
+        const allRoutines = await getAllRoutines();
+        res.send(allRoutines);
+    } catch (error) {
+        next(error)
+    }
 });
 
 // POST /api/routines
